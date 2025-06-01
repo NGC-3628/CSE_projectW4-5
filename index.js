@@ -18,7 +18,7 @@ const port = process.env.PORT || 8080;
 app
     .use(express.json())
     .use('/', routes)
-    .use('/api-dcos', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 //first test
