@@ -3,11 +3,14 @@ import express from 'express';
 import { initDb as mongoInitDb } from './data/database.js'; 
 import 'dotenv/config';
 import routes from './routes/index.js'; 
+import swaggerUi from 'swagger-ui-express';
+
 
 
 //swagger
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger.json' assert {type: 'json'};
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const swaggerDocument = require('./swagger.json');
 
 
 //conection with PORT 
@@ -19,6 +22,8 @@ app
     .use(express.json())
     .use('/', routes)
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 
 //first test
