@@ -1,0 +1,29 @@
+{
+  "name": "cse_projectw4-5",
+  "version": "1.0.0",
+  "description": "w3-4_w_modules",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "swagger": "node ./swagger.js"
+  },
+  "keywords": [
+    "node_jsW3-4"
+  ],
+  "author": "Isaac Iturralde",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.15.1",
+    "swagger": "^0.7.5",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "swagger-autogen": "^2.23.7"
+  }
+}
