@@ -13,7 +13,7 @@ const useSchema = mongoose.Schema({
         required: true, 
     },
     grade: {
-        type: Int32,
+        type: Number,
         required: true,
     }
 });

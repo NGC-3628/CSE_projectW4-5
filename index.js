@@ -4,9 +4,10 @@ import { initDb as mongoInitDb } from './data/database.js';
 import 'dotenv/config';
 import routes from './routes/index.js'; 
 
+
 //swagger
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger.json';
+import swaggerDocument from './swagger.json' assert {type: 'json'};
 
 
 //conection with PORT 
