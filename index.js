@@ -27,7 +27,7 @@ app
 
 
 //first test
-app.get('/', (req, res) => {res.send("ProjectW3-4, further information type \"/contacts or /api-doc\"")});
+app.get('/', (req, res) => {res.send("ProjectW3-4, further information type \"/contacts or /teachers or /api-doc\"")});
 
 
 //ignition to database 

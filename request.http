@@ -1,7 +1,10 @@
-###
+### students
 GET http://localhost:8080/students HTTP/1.1
 
-###
+### teachers
+GET http://localhost:8080/teachers HTTP/1.1
+
+### students
 POST http://localhost:8080/students HTTP/1.1
 Content-Type: application/json
 
@@ -13,7 +16,18 @@ Content-Type: application/json
     "grade":"7"
 }
 
-###
+### teachers
+POST http://localhost:8080/teachers HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "name":"Muriel Austin",
+    "email":"muriel.austin@example.edu",
+    "subject":"dean"
+}
+
+### students
 PUT http://localhost:8080/students/683cde36897c142728eb69ca HTTP/1.1
 Content-Type: application/json
 
@@ -21,5 +35,16 @@ Content-Type: application/json
     "grade":"7"
 }
 
-###
+### teachers
+PUT http://localhost:8080/students/683cde36897c142728eb69ca HTTP/1.1
+Content-Type: application/json
+
+{
+    "grade":"7"
+}
+
+### student
+DELETE http://localhost:8080/students/683cd9343c0692a54fe241bb HTTP/1.1
+
+### teachers
 DELETE http://localhost:8080/students/683cd9343c0692a54fe241bb HTTP/1.1

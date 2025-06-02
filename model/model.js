@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const useSchema = mongoose.Schema({
+const useSchemaStudents = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -18,4 +18,19 @@ const useSchema = mongoose.Schema({
     }
 });
 
-export{useSchema};
+const useSchemaTeachers = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+        required: true
+    }
+});
+
+export{useSchemaStudents, useSchemaTeachers};
