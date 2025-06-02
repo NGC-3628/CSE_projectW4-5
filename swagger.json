@@ -5,10 +5,10 @@
     "description": "usersApi",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse-projectw4-5.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/students/": {
