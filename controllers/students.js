@@ -1,7 +1,7 @@
 import { getDatabase } from '../data/database.js'; 
 import { ObjectId } from 'mongodb';
 
-
+//GET   GET ALL STUDENTS
 const getAll = async (req, res) => {
     const db = getDatabase();
     const result = await db.collection('contacts').find();
@@ -11,6 +11,7 @@ const getAll = async (req, res) => {
     });
 };
 
+//GET   GET ONE STUDENT
 const getSingle = async (req, res) => {
     const userId = new ObjectId(req.params.id);
     const db = getDatabase(); 
@@ -21,7 +22,8 @@ const getSingle = async (req, res) => {
     });
 };
 
-//post
+
+//POST   CREATE STUDENT
 const addContact = async (req, res) => {
     const db = getDatabase();
     const contact = {
@@ -39,6 +41,7 @@ const addContact = async (req, res) => {
     }
 };
 
+//UPDATE   update status
 const updateContact = async (req, res) => {
     const db = getDatabase();
     const userId = new ObjectId(req.params.id);
@@ -52,7 +55,7 @@ const updateContact = async (req, res) => {
     try {
         const result = await db.collection('contacts').updateOne(
             { _id: userId },
-            { $set: updatedContact }
+            { $set: req.body }
         );
         res.status(200).json(result);
     } catch (err) {
@@ -60,6 +63,8 @@ const updateContact = async (req, res) => {
     }
 };
 
+
+//DELETE
 const deleteContact = async (req, res) => {
     const db = getDatabase();
     const userId = new ObjectId(req.params.id);
