@@ -3,23 +3,39 @@ import { ObjectId } from "mongodb";
 
 //GET all teachers
 const getAll = async (req, res) => {
-    const db = getDatabase();
-    const result = await db.collection('teachers').find();
-    result.toArray().then((teachers) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(teachers);
-    });
+    try{
+        const db = getDatabase();
+        const result = await db.collection('teachers').find();
+        result.toArray().then((teachers) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(teachers);
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message || 'Internal server error' });
+    }
 };
 
 //GET one teacher by id
 const getSingle = async (req, res) => {
-    const userId = new ObjectId(req.params.id);
-    const db = getDatabase();
-    const result = await db.collection('teachers').find({ _id: userId });
-    result.toArray().then((teachers) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(teachers[0]);
-    });
+    try{
+        const userId = new ObjectId(req.params.id);
+        const db = getDatabase();
+        const result = await db.collection('teachers').find({ _id: userId });
+        result.toArray().then((teachers) => {
+            if (teachers.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).json(teachers[0]);
+            } else {
+                res.status(404).json({ message: 'Student cannot be found' });
+            }
+        });
+    }catch (err) {
+        if (err.name === 'BSONError' && err.message.includes('inputBuffer')) { 
+             res.status(400).json({ message: 'Id number invalid\nBad request'})
+        } else {
+             res.status(500).json({ message: err.message || 'Internal server error' });
+        }
+    }
 };
 
 
