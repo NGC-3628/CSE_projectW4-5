@@ -6,7 +6,7 @@ import routes from './routes/index.js';
 import swaggerUi from 'swagger-ui-express';
 import passport, { Passport } from 'passport';
 import session from 'express-session';
-import { Strategy as GitHubStrategy } from 'passport-github2';
+import { Strategy as GitHubStrategy } from 'passport-github';
 
 
 
