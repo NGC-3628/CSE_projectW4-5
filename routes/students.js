@@ -38,7 +38,7 @@ const idValidator = (id = 'id') => {
 const validation = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    return next;
+    return next();
   }
 
   // catch all errors if it is the case and display to user

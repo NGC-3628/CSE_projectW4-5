@@ -34,7 +34,7 @@ const idValidator = (id = 'id') => {
   const validation = (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
-      return next;
+      return next();
     }
   
     // catch all errors if it is the case and display to user
@@ -46,10 +46,10 @@ const idValidator = (id = 'id') => {
     });
   };
 
-router.get('/', getAll);
-router.get('/:id', getSingle, validation, idValidator('id'));
-router.post('/', addTeachers, schemaValidator, validation);
-router.put('/:id', updateContact, schemaValidator ,validation, idValidator('id'));
-router.delete('/:id', deleteContact, validation, idValidator('id'));
+  router.get('/', getAll); // Esta línea está bien
+  router.get('/:id', idValidator('id'), validation, getSingle);
+  router.post('/', schemaValidator(), validation, addTeachers);
+  router.put('/:id', idValidator('id'), schemaValidator(), validation, updateContact);
+  router.delete('/:id', idValidator('id'), validation, deleteContact);
 
 export default router; 
