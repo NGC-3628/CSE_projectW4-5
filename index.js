@@ -1,5 +1,6 @@
 // ES modules
 import express from 'express';
+import cors from 'cors';
 import { initDb as mongoInitDb } from './data/database.js'; 
 import 'dotenv/config';
 import routes from './routes/index.js'; 
@@ -38,7 +39,7 @@ app
     .use((req, res, next) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader(
-            "Accesse-Control-Allow-Headers",
+            "Access-Control-Allow-Headers",
             "Origin, X-Requested-With, Content-type, Accept, Z-Key, Authorization"
         );
         res.setHeader(
@@ -47,7 +48,7 @@ app
         );
         next();
     })
-    .use(cors({methods: ['POST', 'GET', 'PUT', 'PACH', 'OPTION',  'DELETE']}))
+    .use(cors({methods: ['POST', 'GET', 'PUT', 'PATCH', 'OPTION',  'DELETE']}))
     .use(cors({ origin: "*"}))
     .use("/", require("./routes/index.js"));
 
