@@ -1,55 +1,50 @@
 import express from 'express';
 import { body, param, validationResult } from 'express-validator';
-import{
-    getAll,
-    getSingle,
-    addTeachers,
-    updateContact,
-    deleteContact
+import {
+  getAll,
+  getSingle,
+  addTeachers,
+  updateContact,
+  deleteContact
 } from '../controllers/teachers.js';
 
 const router = express.Router();
 
+
+//like regexp. 
 const schemaValidator = () => {
-    return[
-        body('name')
-            .isString().withMessage('name must be a string')
-            .notEmpty().withMessage('name is requiered'),
-        body('email')
-            .isEmail().withMessage('Must be a valid email address.')
-            .notEmpty().withMessage('Email is required.'),
-        body('subject')
-            .isString().withMessage('subject must be a string')
-            .notEmpty().withMessage('subject is requiered'),
-    ];
+  return [
+    body('name')
+      .isString().withMessage('name must be a string')
+      .notEmpty().withMessage('name is required'),
+    body('email')
+      .isEmail().withMessage('Must be a valid email address.')
+      .notEmpty().withMessage('Email is required.'),
+    body('subject')
+      .isString().withMessage('subject must be a string')
+      .notEmpty().withMessage('subject is required'),
+  ];
 };
 
-//middleware to check if :id is correct
-//I found this mongoid validator parameter
 const idValidator = (id = 'id') => {
-    return [param(id).isMongoId().withMessage(`The id '${id}' is not a valid MongoDB id.`)];
-  };
-  
-  //middleware to handle validators
-  const validation = (req, res, next) => {
-    const errors = validationResult(req);
-    if (errors.isEmpty()) {
-      return next();
-    }
-  
-    // catch all errors if it is the case and display to user
-    const givenErrors = [];
-    errors.array().map(err => givenErrors.push({[err.path]: err.msg}));
-  
-    return res.status(400).json({
-      errors: givenErrors,
-    });
-  };
+  return [param(id).isMongoId().withMessage(`The id '${id}' is not a valid MongoDB id.`)];
+};
 
-  router.get('/', getAll); // Esta línea está bien
-  router.get('/:id', idValidator('id'), validation, getSingle);
-  router.post('/', schemaValidator(), validation, addTeachers);
-  router.put('/:id', idValidator('id'), schemaValidator(), validation, updateContact);
-  router.delete('/:id', idValidator('id'), validation, deleteContact);
+const validation = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    return next();
+  }
+  const givenErrors = [];
+  errors.array().map(err => givenErrors.push({ [err.path]: err.msg }));
+  return res.status(400).json({ errors: givenErrors });
+};
 
-export default router; 
+
+router.get('/', getAll);
+router.get('/:id', idValidator('id'), validation, getSingle);
+router.post('/', schemaValidator(), validation, addTeachers);
+router.put('/:id', idValidator('id'), schemaValidator(), validation, updateContact);
+router.delete('/:id', idValidator('id'), validation, deleteContact);
+
+export default router;
