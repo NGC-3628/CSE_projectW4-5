@@ -1,4 +1,5 @@
 import express from 'express';
+import { isAuthenticated } from '../middleware/authenticate.js';
 import { body, param, validationResult } from 'express-validator';
 import {
   getAll,
@@ -43,8 +44,8 @@ const validation = (req, res, next) => {
 
 router.get('/', getAll);
 router.get('/:id', idValidator('id'), validation, getSingle);
-router.post('/', schemaValidator(), validation, addTeachers);
-router.put('/:id', idValidator('id'), schemaValidator(), validation, updateContact);
-router.delete('/:id', idValidator('id'), validation, deleteContact);
+router.post('/', isAuthenticated,schemaValidator(), validation, addTeachers);
+router.put('/:id', isAuthenticated, idValidator('id'), schemaValidator(), validation, updateContact);
+router.delete('/:id', isAuthenticated, idValidator('id'), validation, deleteContact);
 
 export default router;
