@@ -4,18 +4,11 @@ import { initDb as mongoInitDb } from './data/database.js';
 import 'dotenv/config';
 import cors from 'cors'; 
 import routes from './routes/index.js';
-import swaggerUi from 'swagger-ui-express';
+//import swaggerUi from 'swagger-ui-express';
 import passport from 'passport';
 import session from 'express-session';
 import { Strategy as GitHubStrategy } from 'passport-github';
 
-//require created because es modules didn't work. 
-//import { createRequire } from 'module';
-
-
-//swagger
-//const require = createRequire(import.meta.url);
-//const swaggerDocument = require('./swagger.json'); //here the 'require' is used as a constant.
 
 //express
 const app = express();
@@ -36,6 +29,9 @@ app
 
   
   //.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+//first test
+app.get('/', (req, res) => {res.send("ProjectW3-4, further information type \"/contacts or /teachers or /api-docs\"")});
 
 // passport / oauth
 passport.use(new GitHubStrategy({
